@@ -208,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typingElement) {
 
         const words = [
-            "Student",
             "IT Student",
             "Future Web Developer",
             "Future IT Professional"
