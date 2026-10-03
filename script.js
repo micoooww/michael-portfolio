@@ -2,8 +2,6 @@
 // PORTFOLIO WEBSITE - SCRIPT.JS
 // ==========================================
 
-
-// Wait until the HTML page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
@@ -13,16 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector("nav");
     const navList = document.querySelector("nav ul");
 
-    // Create mobile menu button
     const menuButton = document.createElement("button");
 
     menuButton.innerHTML = "☰";
     menuButton.classList.add("menu-button");
 
-    // Add button to navigation
     nav.appendChild(menuButton);
 
-    // Menu button styling
     menuButton.style.display = "none";
     menuButton.style.background = "none";
     menuButton.style.border = "none";
@@ -30,31 +25,28 @@ document.addEventListener("DOMContentLoaded", () => {
     menuButton.style.fontSize = "28px";
     menuButton.style.cursor = "pointer";
 
-
-    // Show/hide mobile menu
     menuButton.addEventListener("click", () => {
-
         navList.classList.toggle("mobile-active");
-
     });
 
 
-    // Close menu when a navigation link is clicked
+    // ==========================================
+    // 2. NAVIGATION LINKS
+    // ==========================================
+
     const navLinks = document.querySelectorAll("nav a");
 
     navLinks.forEach(link => {
 
         link.addEventListener("click", () => {
-
             navList.classList.remove("mobile-active");
-
         });
 
     });
 
 
     // ==========================================
-    // 2. SMOOTH SCROLLING
+    // 3. SMOOTH SCROLLING
     // ==========================================
 
     navLinks.forEach(link => {
@@ -63,11 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const targetId = this.getAttribute("href");
 
-            if (targetId.startsWith("#")) {
+            if (targetId && targetId.startsWith("#")) {
 
                 event.preventDefault();
 
-                const targetSection = document.querySelector(targetId);
+                const targetSection =
+                    document.querySelector(targetId);
 
                 if (targetSection) {
 
@@ -92,10 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 3. ACTIVE NAVIGATION LINK
+    // 4. ACTIVE NAVIGATION LINK
     // ==========================================
 
-    const sections = document.querySelectorAll("section");
+    const sections =
+        document.querySelectorAll("section");
 
     function updateActiveNavigation() {
 
@@ -103,15 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sections.forEach(section => {
 
-            const sectionTop = section.offsetTop - 150;
-            const sectionHeight = section.offsetHeight;
+            const sectionTop =
+                section.offsetTop - 150;
+
+            const sectionHeight =
+                section.offsetHeight;
 
             if (
                 window.scrollY >= sectionTop &&
                 window.scrollY < sectionTop + sectionHeight
             ) {
 
-                currentSection = section.getAttribute("id");
+                currentSection =
+                    section.getAttribute("id");
 
             }
 
@@ -123,7 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
             link.classList.remove("active");
 
             if (
-                link.getAttribute("href") === "#" + currentSection
+                link.getAttribute("href") ===
+                "#" + currentSection
             ) {
 
                 link.classList.add("active");
@@ -134,73 +133,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    window.addEventListener("scroll", updateActiveNavigation);
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation
+    );
 
     updateActiveNavigation();
 
 
     // ==========================================
-    // 4. SCROLL ANIMATION
+    // 5. SCROLL ANIMATION
     // ==========================================
 
-    const animatedElements = document.querySelectorAll(
-        ".skill, .project, #about p, #contact p"
-    );
+    const animatedElements =
+        document.querySelectorAll(
+            ".skill, .project, .portfolio-project-card, #about p, #contact p"
+        );
 
 
     animatedElements.forEach(element => {
 
         element.style.opacity = "0";
-        element.style.transform = "translateY(30px)";
+
+        element.style.transform =
+            "translateY(30px)";
+
         element.style.transition =
             "opacity 0.7s ease, transform 0.7s ease";
 
     });
 
 
-    const observer = new IntersectionObserver(
-        entries => {
+    const observer =
+        new IntersectionObserver(
+            entries => {
 
-            entries.forEach(entry => {
+                entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                    if (entry.isIntersecting) {
 
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
+                        entry.target.style.opacity = "1";
 
-                    observer.unobserve(entry.target);
+                        entry.target.style.transform =
+                            "translateY(0)";
 
-                }
+                        observer.unobserve(
+                            entry.target
+                        );
 
-            });
+                    }
 
-        },
-        {
-            threshold: 0.15
-        }
-    );
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
 
 
     animatedElements.forEach(element => {
-
         observer.observe(element);
-
     });
 
 
     // ==========================================
-    // 5. TYPING EFFECT
+    // 6. TYPING EFFECT
     // ==========================================
 
-    const typingElement = document.querySelector(".hero h3");
+    const typingElement =
+        document.getElementById("typing");
+
 
     if (typingElement) {
 
         const words = [
+            "Student",
             "IT Student",
             "Future Web Developer",
             "Future IT Professional"
         ];
+
 
         let wordIndex = 0;
         let characterIndex = 0;
@@ -209,39 +222,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function typeEffect() {
 
-            const currentWord = words[wordIndex];
+            const currentWord =
+                words[wordIndex];
 
+
+            // Typing
             if (!deleting) {
 
                 typingElement.textContent =
-                    currentWord.substring(0, characterIndex + 1);
+                    currentWord.substring(
+                        0,
+                        characterIndex + 1
+                    );
 
                 characterIndex++;
 
-                if (characterIndex === currentWord.length) {
+
+                // Finished typing
+                if (
+                    characterIndex ===
+                    currentWord.length
+                ) {
 
                     deleting = true;
 
-                    setTimeout(typeEffect, 1500);
+                    setTimeout(
+                        typeEffect,
+                        1500
+                    );
 
                     return;
-
                 }
 
-            } else {
+            }
+
+            // Deleting
+            else {
 
                 typingElement.textContent =
-                    currentWord.substring(0, characterIndex - 1);
+                    currentWord.substring(
+                        0,
+                        characterIndex - 1
+                    );
 
                 characterIndex--;
 
+
+                // Finished deleting
                 if (characterIndex === 0) {
 
                     deleting = false;
 
                     wordIndex++;
 
-                    if (wordIndex >= words.length) {
+                    if (
+                        wordIndex >=
+                        words.length
+                    ) {
 
                         wordIndex = 0;
 
@@ -252,25 +289,32 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            const speed = deleting ? 60 : 100;
+            const speed =
+                deleting ? 60 : 100;
 
-            setTimeout(typeEffect, speed);
+
+            setTimeout(
+                typeEffect,
+                speed
+            );
 
         }
 
 
-        // Start typing effect
+        // Clear "Student" before starting
         typingElement.textContent = "";
+
         typeEffect();
 
     }
 
 
     // ==========================================
-    // 6. BACK TO TOP BUTTON
+    // 7. BACK TO TOP BUTTON
     // ==========================================
 
-    const backToTop = document.createElement("button");
+    const backToTop =
+        document.createElement("button");
 
     backToTop.innerHTML = "↑";
 
@@ -279,7 +323,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Back to top"
     );
 
-    document.body.appendChild(backToTop);
+    document.body.appendChild(
+        backToTop
+    );
 
 
     // Button design
@@ -301,68 +347,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Show button when scrolling
-    window.addEventListener("scroll", () => {
+    window.addEventListener(
+        "scroll",
+        () => {
 
-        if (window.scrollY > 500) {
+            if (window.scrollY > 500) {
 
-            backToTop.style.display = "block";
+                backToTop.style.display =
+                    "block";
 
-        } else {
+            } else {
 
-            backToTop.style.display = "none";
+                backToTop.style.display =
+                    "none";
+
+            }
 
         }
-
-    });
+    );
 
 
     // Back to top action
-    backToTop.addEventListener("click", () => {
+    backToTop.addEventListener(
+        "click",
+        () => {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
-    });
+        }
+    );
 
 
     // ==========================================
-    // 7. PROJECT CARD HOVER EFFECT
+    // 8. PROJECT CARD HOVER EFFECT
     // ==========================================
 
     const projectCards =
-        document.querySelectorAll(".project");
+        document.querySelectorAll(
+            ".project, .portfolio-project-card"
+        );
 
 
     projectCards.forEach(card => {
 
-        card.addEventListener("mouseenter", () => {
+        card.addEventListener(
+            "mouseenter",
+            () => {
 
-            card.style.transform = "translateY(-8px)";
+                card.style.transform =
+                    "translateY(-8px)";
 
-            card.style.transition =
-                "transform 0.3s ease, box-shadow 0.3s ease";
+                card.style.transition =
+                    "transform 0.3s ease, box-shadow 0.3s ease";
 
-            card.style.boxShadow =
-                "0 10px 30px rgba(0, 0, 0, 0.3)";
+                card.style.boxShadow =
+                    "0 10px 30px rgba(0, 0, 0, 0.3)";
 
-        });
+            }
+        );
 
 
-        card.addEventListener("mouseleave", () => {
+        card.addEventListener(
+            "mouseleave",
+            () => {
 
-            card.style.transform = "translateY(0)";
+                card.style.transform =
+                    "translateY(0)";
 
-            card.style.boxShadow = "none";
+                card.style.boxShadow =
+                    "none";
 
-        });
+            }
+        );
 
     });
 
 
     // ==========================================
-    // 8. SKILLS HOVER EFFECT
+    // 9. SKILLS HOVER EFFECT
     // ==========================================
 
     const skillCards =
@@ -371,63 +436,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
     skillCards.forEach(skill => {
 
-        skill.addEventListener("mouseenter", () => {
+        skill.addEventListener(
+            "mouseenter",
+            () => {
 
-            skill.style.transform = "translateY(-8px)";
+                skill.style.transform =
+                    "translateY(-8px)";
 
-            skill.style.transition =
-                "transform 0.3s ease, box-shadow 0.3s ease";
+                skill.style.transition =
+                    "transform 0.3s ease, box-shadow 0.3s ease";
 
-            skill.style.boxShadow =
-                "0 10px 25px rgba(124, 92, 255, 0.2)";
+                skill.style.boxShadow =
+                    "0 10px 25px rgba(124, 92, 255, 0.2)";
 
-        });
+            }
+        );
 
 
-        skill.addEventListener("mouseleave", () => {
+        skill.addEventListener(
+            "mouseleave",
+            () => {
 
-            skill.style.transform = "translateY(0)";
+                skill.style.transform =
+                    "translateY(0)";
 
-            skill.style.boxShadow = "none";
+                skill.style.boxShadow =
+                    "none";
 
-        });
+            }
+        );
 
     });
 
 
     // ==========================================
-    // 9. PROFILE IMAGE EFFECT
+    // 10. PROFILE IMAGE EFFECT
     // ==========================================
 
     const profileImage =
-        document.querySelector(".hero-image img");
+        document.querySelector(
+            ".hero-image img"
+        );
 
 
     if (profileImage) {
 
-        profileImage.addEventListener("mouseenter", () => {
+        profileImage.addEventListener(
+            "mouseenter",
+            () => {
 
-            profileImage.style.transform =
-                "scale(1.05)";
+                profileImage.style.transform =
+                    "scale(1.05)";
 
-            profileImage.style.transition =
-                "transform 0.3s ease";
+                profileImage.style.transition =
+                    "transform 0.3s ease";
 
-        });
+            }
+        );
 
 
-        profileImage.addEventListener("mouseleave", () => {
+        profileImage.addEventListener(
+            "mouseleave",
+            () => {
 
-            profileImage.style.transform =
-                "scale(1)";
+                profileImage.style.transform =
+                    "scale(1)";
 
-        });
+            }
+        );
 
     }
 
 
     // ==========================================
-    // 10. CURRENT YEAR IN FOOTER
+    // 11. CURRENT YEAR IN FOOTER
     // ==========================================
 
     const footer =
@@ -446,7 +528,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 11. PAGE LOAD ANIMATION
+    // 12. PAGE LOAD ANIMATION
     // ==========================================
 
     document.body.style.opacity = "0";
@@ -462,7 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 12. CONSOLE MESSAGE
+    // 13. CONSOLE MESSAGE
     // ==========================================
 
     console.log(
