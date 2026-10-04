@@ -592,3 +592,51 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
+// ==========================================
+// BACK TO PROJECTS - FOOTER SAFE
+// ==========================================
+
+const backButton = document.querySelector(".back-button");
+const footerElement = document.querySelector("footer");
+
+if (backButton && footerElement) {
+
+    function updateBackButton() {
+
+        const footerRect = footerElement.getBoundingClientRect();
+
+        const viewportHeight = window.innerHeight;
+
+        const normalBottom = 25;
+
+        const footerGap = 15;
+
+        let bottomPosition = normalBottom;
+
+        // Move button upward when footer gets close
+        if (footerRect.top < viewportHeight - normalBottom) {
+
+            bottomPosition =
+                viewportHeight -
+                footerRect.top +
+                footerGap;
+        }
+
+        backButton.style.bottom =
+            `${bottomPosition}px`;
+    }
+
+    window.addEventListener(
+        "scroll",
+        updateBackButton,
+        { passive: true }
+    );
+
+    window.addEventListener(
+        "resize",
+        updateBackButton
+    );
+
+    updateBackButton();
+}
