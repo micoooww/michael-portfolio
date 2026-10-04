@@ -543,103 +543,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // 13. CONSOLE MESSAGE
+    // 13. BACK TO PROJECTS BUTTON
+    // CENTER BOTTOM + FOOTER SAFE
+    // ==========================================
+
+    const backButton = document.querySelector(".back-button");
+    const footerElement = document.querySelector("footer");
+
+    if (backButton) {
+
+        function updateBackButton() {
+
+            const fixedBottom = 25;
+            const footerGap = 15;
+
+            if (!footerElement) {
+                backButton.style.bottom = fixedBottom + "px";
+                return;
+            }
+
+            const footerRect = footerElement.getBoundingClientRect();
+            const buttonHeight = backButton.offsetHeight;
+            const viewportHeight = window.innerHeight;
+
+            let newBottom = fixedBottom;
+
+            if (footerRect.top < viewportHeight - fixedBottom) {
+                newBottom =
+                    viewportHeight - footerRect.top +
+                    buttonHeight + footerGap;
+            }
+
+            backButton.style.bottom = newBottom + "px";
+        }
+
+        window.addEventListener("scroll", updateBackButton, { passive: true });
+        window.addEventListener("resize", updateBackButton);
+        updateBackButton();
+    }
+
+
+    // ==========================================
+    // 14. CONSOLE MESSAGE
     // ==========================================
 
     console.log(
         "Portfolio website loaded successfully!"
     );
-
-
-    // ==========================================
-    // 14. BACK TO PROJECTS BUTTON
-    // FOOTER-SAFE POSITION
-    // ==========================================
-
-    const backButton =
-        document.querySelector(".back-button");
-
-    const footerElement =
-        document.querySelector("footer");
-
-
-    function controlBackButton() {
-
-        if (!backButton || !footerElement) {
-            return;
-        }
-
-
-        // Get footer position
-        const footerRect =
-            footerElement.getBoundingClientRect();
-
-
-        // Get button height
-        const buttonHeight =
-            backButton.offsetHeight;
-
-
-        // Normal distance from bottom
-        const normalBottom = 25;
-
-
-        // Start with normal position
-        let bottomPosition =
-            normalBottom;
-
-
-        // ==========================================
-        // FOOTER IS ENTERING THE SCREEN
-        // ==========================================
-
-        if (
-            footerRect.top <
-            window.innerHeight
-        ) {
-
-            bottomPosition =
-                window.innerHeight -
-                footerRect.top +
-                buttonHeight +
-                15;
-
-        }
-
-
-        // Apply position
-        backButton.style.bottom =
-            bottomPosition + "px";
-    }
-
-
-    // ==========================================
-    // RUN WHEN SCROLLING
-    // ==========================================
-
-    window.addEventListener(
-        "scroll",
-        controlBackButton,
-        {
-            passive: true
-        }
-    );
-
-
-    // ==========================================
-    // RUN WHEN WINDOW IS RESIZED
-    // ==========================================
-
-    window.addEventListener(
-        "resize",
-        controlBackButton
-    );
-
-
-    // ==========================================
-    // RUN WHEN PAGE LOADS
-    // ==========================================
-
-    controlBackButton();
 
 });
