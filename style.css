@@ -740,7 +740,8 @@ section {
 .back-button {
     position: fixed !important;
     left: 50% !important;
-    bottom: 25px !important;
+    bottom: 25px;
+    top: auto;
     transform: translateX(-50%) !important;
     display: inline-flex !important;
     align-items: center;
@@ -756,7 +757,7 @@ section {
     overflow: hidden;
     z-index: 99999 !important;
     box-shadow: 0 8px 25px rgba(124, 92, 255, 0.35);
-    transition: bottom 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
+    transition: top 0.25s ease, bottom 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
 }
 
 .back-button:hover {

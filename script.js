@@ -547,38 +547,94 @@ document.addEventListener("DOMContentLoaded", () => {
     // CENTER BOTTOM + FOOTER SAFE
     // ==========================================
 
-    const backButton = document.querySelector(".back-button");
-    const footerElement = document.querySelector("footer");
+    const backButton =
+        document.querySelector(".back-button");
 
-    if (backButton) {
+    const footerElement =
+        document.querySelector("footer");
+
+    if (backButton && footerElement) {
+
+        let updateFrame = null;
 
         function updateBackButton() {
 
-            const fixedBottom = 25;
-            const footerGap = 15;
-
-            if (!footerElement) {
-                backButton.style.bottom = fixedBottom + "px";
-                return;
+            if (updateFrame) {
+                cancelAnimationFrame(updateFrame);
             }
 
-            const footerRect = footerElement.getBoundingClientRect();
-            const buttonHeight = backButton.offsetHeight;
-            const viewportHeight = window.innerHeight;
+            updateFrame = requestAnimationFrame(() => {
 
-            let newBottom = fixedBottom;
+                const footerRect =
+                    footerElement.getBoundingClientRect();
 
-            if (footerRect.top < viewportHeight - fixedBottom) {
-                newBottom =
-                    viewportHeight - footerRect.top +
-                    buttonHeight + footerGap;
-            }
+                const viewportHeight =
+                    window.innerHeight;
 
-            backButton.style.bottom = newBottom + "px";
+                const buttonHeight =
+                    backButton.offsetHeight;
+
+                const normalBottom = 25;
+                const footerGap = 20;
+
+                // Keep the button at the normal bottom position
+                // while the footer is still below the viewport.
+                if (footerRect.top >= viewportHeight - normalBottom) {
+
+                    backButton.style.setProperty(
+                        "top",
+                        "auto",
+                        "important"
+                    );
+
+                    backButton.style.setProperty(
+                        "bottom",
+                        `${normalBottom}px`,
+                        "important"
+                    );
+
+                    return;
+                }
+
+                // The footer is entering the viewport.
+                // Position the button directly above the footer.
+                const targetTop = Math.max(
+                    10,
+                    footerRect.top -
+                    buttonHeight -
+                    footerGap
+                );
+
+                backButton.style.setProperty(
+                    "bottom",
+                    "auto",
+                    "important"
+                );
+
+                backButton.style.setProperty(
+                    "top",
+                    `${targetTop}px`,
+                    "important"
+                );
+            });
         }
 
-        window.addEventListener("scroll", updateBackButton, { passive: true });
-        window.addEventListener("resize", updateBackButton);
+        window.addEventListener(
+            "scroll",
+            updateBackButton,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            updateBackButton
+        );
+
+        window.addEventListener(
+            "load",
+            updateBackButton
+        );
+
         updateBackButton();
     }
 
@@ -592,51 +648,3 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
-
-// ==========================================
-// BACK TO PROJECTS - FOOTER SAFE
-// ==========================================
-
-const backButton = document.querySelector(".back-button");
-const footerElement = document.querySelector("footer");
-
-if (backButton && footerElement) {
-
-    function updateBackButton() {
-
-        const footerRect = footerElement.getBoundingClientRect();
-
-        const viewportHeight = window.innerHeight;
-
-        const normalBottom = 25;
-
-        const footerGap = 15;
-
-        let bottomPosition = normalBottom;
-
-        // Move button upward when footer gets close
-        if (footerRect.top < viewportHeight - normalBottom) {
-
-            bottomPosition =
-                viewportHeight -
-                footerRect.top +
-                footerGap;
-        }
-
-        backButton.style.bottom =
-            `${bottomPosition}px`;
-    }
-
-    window.addEventListener(
-        "scroll",
-        updateBackButton,
-        { passive: true }
-    );
-
-    window.addEventListener(
-        "resize",
-        updateBackButton
-    );
-
-    updateBackButton();
-}
