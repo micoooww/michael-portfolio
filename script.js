@@ -550,4 +550,103 @@ document.addEventListener("DOMContentLoaded", () => {
         "Portfolio website loaded successfully!"
     );
 
+
+    // ==========================================
+    // 14. BACK TO PROJECTS BUTTON
+    // FOOTER-SAFE POSITION
+    // ==========================================
+
+    const backButton =
+        document.querySelector(".back-button");
+
+    const footerElement =
+        document.querySelector("footer");
+
+
+    function controlBackButton() {
+
+        if (!backButton || !footerElement) {
+            return;
+        }
+
+
+        // Get the footer position
+        const footerTop =
+            footerElement.getBoundingClientRect().top;
+
+
+        // Get the browser viewport height
+        const viewportHeight =
+            window.innerHeight;
+
+
+        // Get the button height
+        const buttonHeight =
+            backButton.offsetHeight;
+
+
+        // Normal distance from bottom
+        const normalBottom = 25;
+
+
+        // ==========================================
+        // NORMAL POSITION
+        // Footer is not visible yet
+        // ==========================================
+
+        if (footerTop >= viewportHeight) {
+
+            backButton.style.bottom =
+                normalBottom + "px";
+
+            return;
+        }
+
+
+        // ==========================================
+        // FOOTER IS ENTERING THE SCREEN
+        // Move button upward
+        // ==========================================
+
+        const requiredBottom =
+            viewportHeight -
+            footerTop +
+            buttonHeight +
+            10;
+
+
+        backButton.style.bottom =
+            Math.max(
+                normalBottom,
+                requiredBottom
+            ) + "px";
+    }
+
+
+    // ==========================================
+    // LISTEN FOR SCROLL AND RESIZE
+    // ==========================================
+
+    if (backButton && footerElement) {
+
+        window.addEventListener(
+            "scroll",
+            controlBackButton,
+            {
+                passive: true
+            }
+        );
+
+
+        window.addEventListener(
+            "resize",
+            controlBackButton
+        );
+
+
+        // Run once when page loads
+        controlBackButton();
+
+    }
+
 });

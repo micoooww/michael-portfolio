@@ -28,13 +28,10 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100%;
-
     z-index: 1000;
 
     background: rgba(8, 8, 18, 0.92);
-
     backdrop-filter: blur(12px);
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -42,17 +39,12 @@ header {
 
 nav {
     max-width: 1350px;
-
     height: 75px;
-
     margin: auto;
-
     padding: 0 25px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 }
 
@@ -63,17 +55,13 @@ nav {
 
 .logo {
     color: #8a8ee9;
-
     font-size: 30px;
-
     font-weight: bold;
 }
 
 .logo span {
     color: #4826d1;
-
     font-size: 32px;
-
     font-weight: bold;
 }
 
@@ -84,9 +72,7 @@ nav {
 
 nav ul {
     display: flex;
-
     list-style: none;
-
     gap: 35px;
 }
 
@@ -94,11 +80,9 @@ nav ul li a {
     position: relative;
 
     color: white;
-
     text-decoration: none;
 
     font-size: 16px;
-
     font-weight: 500;
 
     transition: 0.3s ease;
@@ -112,13 +96,10 @@ nav ul li a::after {
     content: "";
 
     position: absolute;
-
     left: 0;
-
     bottom: -7px;
 
     width: 0;
-
     height: 2px;
 
     background: #7c5cff;
@@ -137,17 +118,13 @@ nav ul li a:hover::after {
 
 .hero {
     max-width: 1350px;
-
     min-height: 100vh;
 
     margin: auto;
-
     padding: 120px 25px 70px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 80px;
@@ -155,23 +132,18 @@ nav ul li a:hover::after {
 
 .hero-text {
     flex: 1;
-
     max-width: 700px;
 }
 
 .hello {
     color: #8b72ff;
-
     font-size: 24px;
-
     margin-bottom: 5px;
 }
 
 .hero-text h1 {
     font-size: 68px;
-
     line-height: 1.1;
-
     margin-bottom: 15px;
 
     background: linear-gradient(
@@ -181,9 +153,7 @@ nav ul li a:hover::after {
     );
 
     -webkit-background-clip: text;
-
     background-clip: text;
-
     -webkit-text-fill-color: transparent;
 }
 
@@ -194,24 +164,20 @@ nav ul li a:hover::after {
 
 .typing-text {
     color: #8b72ff;
-
     font-size: 30px;
 
     margin-bottom: 25px;
-
     min-height: 45px;
 }
 
 #typing {
     border-right: 3px solid #8b72ff;
-
     padding-right: 5px;
 
     animation: blinkCursor 0.7s infinite;
 }
 
 @keyframes blinkCursor {
-
     0%,
     50% {
         border-color: #8b72ff;
@@ -232,7 +198,6 @@ nav ul li a:hover::after {
     max-width: 650px;
 
     color: #c0bfd0;
-
     font-size: 18px;
 }
 
@@ -245,7 +210,6 @@ nav ul li a:hover::after {
     display: inline-block;
 
     margin-top: 32px;
-
     padding: 15px 30px;
 
     color: white;
@@ -261,7 +225,6 @@ nav ul li a:hover::after {
     border-radius: 11px;
 
     font-size: 17px;
-
     font-weight: bold;
 
     box-shadow:
@@ -288,19 +251,15 @@ nav ul li a:hover::after {
     flex: 0 0 350px;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 }
 
 .photo-card {
     width: 350px;
-
     height: 350px;
 
     perspective: 1000px;
-
     cursor: pointer;
 }
 
@@ -308,7 +267,6 @@ nav ul li a:hover::after {
     position: relative;
 
     width: 100%;
-
     height: 100%;
 
     transform-style: preserve-3d;
@@ -326,11 +284,9 @@ nav ul li a:hover::after {
     position: absolute;
 
     top: 0;
-
     left: 0;
 
     width: 100%;
-
     height: 100%;
 
     overflow: hidden;
@@ -360,7 +316,6 @@ nav ul li a:hover::after {
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -377,7 +332,6 @@ section {
     max-width: 1350px;
 
     margin: auto;
-
     padding: 100px 25px;
 }
 
@@ -397,7 +351,6 @@ section {
     display: block;
 
     width: 60px;
-
     height: 4px;
 
     margin: 12px auto 0;
@@ -422,7 +375,6 @@ section {
 
 .about-container {
     max-width: 900px;
-
     margin: auto;
 }
 
@@ -445,7 +397,6 @@ section {
 
 .about-text p {
     color: #b9b9c8;
-
     margin-bottom: 20px;
 }
 
@@ -578,7 +529,6 @@ section {
 
 .portfolio-project-image {
     width: 100%;
-
     height: 230px;
 
     overflow: hidden;
@@ -593,7 +543,6 @@ section {
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -739,7 +688,6 @@ section {
 
 .certificate-image {
     width: 100%;
-
     height: 260px;
 
     overflow: hidden;
@@ -754,7 +702,6 @@ section {
     display: block;
 
     width: 100%;
-
     height: 100%;
 
     object-fit: contain;
@@ -821,14 +768,14 @@ section {
 
 
 /* =========================================
-   BACK BUTTON - FIXED
+   BACK BUTTON
+   FOOTER-SAFE FIX
 ========================================= */
 
 .back-button {
     position: fixed;
 
     left: 25px;
-
     bottom: 25px;
 
     display: inline-flex;
@@ -858,13 +805,13 @@ section {
     z-index: 9999;
 
     box-shadow:
-        0 8px 25px
-        rgba(124, 92, 255, 0.35);
+        0 8px 25px rgba(124, 92, 255, 0.35);
 
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease,
-        gap 0.3s ease;
+        gap 0.3s ease,
+        bottom 0.2s ease;
 }
 
 .back-button:hover {
@@ -873,8 +820,7 @@ section {
     gap: 15px;
 
     box-shadow:
-        0 12px 35px
-        rgba(124, 92, 255, 0.55);
+        0 12px 35px rgba(124, 92, 255, 0.55);
 }
 
 
@@ -957,7 +903,6 @@ section {
 
 .detail-image img {
     width: 100%;
-
     height: 100%;
 
     display: block;
@@ -1154,9 +1099,6 @@ section {
     margin-bottom: 0;
 }
 
-
-/* CLICKABLE EMAIL AND GITHUB */
-
 .contact-container a {
     color: #9b85ff;
 
@@ -1210,7 +1152,6 @@ footer {
 
     .photo-card {
         width: 300px;
-
         height: 300px;
     }
 
@@ -1235,7 +1176,6 @@ footer {
         height: auto;
 
         padding-top: 18px;
-
         padding-bottom: 18px;
 
         flex-direction: column;
@@ -1262,7 +1202,6 @@ footer {
         min-height: auto;
 
         padding-top: 160px;
-
         padding-bottom: 80px;
 
         flex-direction: column;
@@ -1286,7 +1225,6 @@ footer {
 
     .typing-text {
         font-size: 24px;
-
         min-height: 38px;
     }
 
@@ -1300,7 +1238,6 @@ footer {
 
     .photo-card {
         width: 280px;
-
         height: 280px;
     }
 
@@ -1340,19 +1277,6 @@ footer {
     }
 
 
-    /* FIXED BACK BUTTON */
-
-    .back-button {
-        left: 15px;
-
-        bottom: 15px;
-
-        padding: 11px 16px;
-
-        font-size: 13px;
-    }
-
-
     /* PROJECT DETAIL */
 
     .project-page {
@@ -1376,6 +1300,18 @@ footer {
 
     .project-info h2 {
         font-size: 20px;
+    }
+
+
+    /* BACK BUTTON */
+
+    .back-button {
+        left: 15px;
+        bottom: 15px;
+
+        padding: 11px 16px;
+
+        font-size: 13px;
     }
 }
 
@@ -1404,7 +1340,6 @@ footer {
 
     .hero {
         padding-left: 15px;
-
         padding-right: 15px;
     }
 
@@ -1414,13 +1349,11 @@ footer {
 
     .typing-text {
         font-size: 21px;
-
         min-height: 34px;
     }
 
     .photo-card {
         width: 240px;
-
         height: 240px;
     }
 
@@ -1472,11 +1405,11 @@ footer {
         height: 210px;
     }
 
-    /* BACK BUTTON ON SMALL PHONES */
+
+    /* BACK BUTTON */
 
     .back-button {
         left: 10px;
-
         bottom: 10px;
 
         padding: 10px 14px;
