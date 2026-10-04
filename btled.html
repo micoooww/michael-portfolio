@@ -117,5 +117,108 @@
     <p>&copy; 2026 Michael Fermo. All Rights Reserved.</p>
 </footer>
 
+<script src="script.js"></script>
+
+<script>
+(function () {
+
+    const backButton = document.querySelector(".back-button");
+    const footer = document.querySelector("footer");
+
+    if (!backButton || !footer) {
+        return;
+    }
+
+    function updateBackButton() {
+
+        const footerRect =
+            footer.getBoundingClientRect();
+
+        const buttonRect =
+            backButton.getBoundingClientRect();
+
+        const viewportHeight =
+            window.innerHeight;
+
+        const normalBottom = 25;
+        const gap = 20;
+
+        /*
+         * NORMAL POSITION
+         * Button stays 25px above the bottom.
+         */
+        if (
+            footerRect.top >
+            viewportHeight - normalBottom
+        ) {
+
+            backButton.style.setProperty(
+                "top",
+                "auto",
+                "important"
+            );
+
+            backButton.style.setProperty(
+                "bottom",
+                normalBottom + "px",
+                "important"
+            );
+
+            return;
+        }
+
+        /*
+         * FOOTER IS REACHING THE SCREEN
+         * Put the button directly above the footer.
+         */
+        const newTop =
+            footerRect.top -
+            buttonRect.height -
+            gap;
+
+        backButton.style.setProperty(
+            "bottom",
+            "auto",
+            "important"
+        );
+
+        backButton.style.setProperty(
+            "top",
+            Math.max(80, newTop) + "px",
+            "important"
+        );
+    }
+
+    /*
+     * Update whenever the page scrolls.
+     */
+    window.addEventListener(
+        "scroll",
+        updateBackButton,
+        { passive: true }
+    );
+
+    /*
+     * Update when browser size changes.
+     */
+    window.addEventListener(
+        "resize",
+        updateBackButton
+    );
+
+    /*
+     * Keep checking the footer position.
+     * This makes it work even during smooth scrolling.
+     */
+    function loop() {
+        updateBackButton();
+        requestAnimationFrame(loop);
+    }
+
+    loop();
+
+})();
+</script>
+
 </body>
 </html>
