@@ -570,17 +570,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        // Get the footer position
-        const footerTop =
-            footerElement.getBoundingClientRect().top;
+        // Get footer position
+        const footerRect =
+            footerElement.getBoundingClientRect();
 
 
-        // Get the browser viewport height
-        const viewportHeight =
-            window.innerHeight;
-
-
-        // Get the button height
+        // Get button height
         const buttonHeight =
             backButton.offsetHeight;
 
@@ -589,64 +584,62 @@ document.addEventListener("DOMContentLoaded", () => {
         const normalBottom = 25;
 
 
-        // ==========================================
-        // NORMAL POSITION
-        // Footer is not visible yet
-        // ==========================================
-
-        if (footerTop >= viewportHeight) {
-
-            backButton.style.bottom =
-                normalBottom + "px";
-
-            return;
-        }
+        // Start with normal position
+        let bottomPosition =
+            normalBottom;
 
 
         // ==========================================
         // FOOTER IS ENTERING THE SCREEN
-        // Move button upward
         // ==========================================
 
-        const requiredBottom =
-            viewportHeight -
-            footerTop +
-            buttonHeight +
-            10;
+        if (
+            footerRect.top <
+            window.innerHeight
+        ) {
+
+            bottomPosition =
+                window.innerHeight -
+                footerRect.top +
+                buttonHeight +
+                15;
+
+        }
 
 
+        // Apply position
         backButton.style.bottom =
-            Math.max(
-                normalBottom,
-                requiredBottom
-            ) + "px";
+            bottomPosition + "px";
     }
 
 
     // ==========================================
-    // LISTEN FOR SCROLL AND RESIZE
+    // RUN WHEN SCROLLING
     // ==========================================
 
-    if (backButton && footerElement) {
-
-        window.addEventListener(
-            "scroll",
-            controlBackButton,
-            {
-                passive: true
-            }
-        );
+    window.addEventListener(
+        "scroll",
+        controlBackButton,
+        {
+            passive: true
+        }
+    );
 
 
-        window.addEventListener(
-            "resize",
-            controlBackButton
-        );
+    // ==========================================
+    // RUN WHEN WINDOW IS RESIZED
+    // ==========================================
+
+    window.addEventListener(
+        "resize",
+        controlBackButton
+    );
 
 
-        // Run once when page loads
-        controlBackButton();
+    // ==========================================
+    // RUN WHEN PAGE LOADS
+    // ==========================================
 
-    }
+    controlBackButton();
 
 });
