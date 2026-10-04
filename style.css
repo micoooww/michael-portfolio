@@ -733,37 +733,77 @@ section {
 
 
 /* =========================================
-   BACK BUTTON
-   CENTER BOTTOM + FOOTER SAFE
+   BACK TO PROJECTS
+   CENTERED + FOOTER SAFE
 ========================================= */
 
 .back-button {
     position: fixed !important;
+
     left: 50% !important;
     bottom: 25px;
-    top: auto;
+
     transform: translateX(-50%) !important;
+
     display: inline-flex !important;
+
     align-items: center;
     justify-content: center;
+
     gap: 10px;
+
     padding: 13px 22px;
+
     color: white !important;
-    background: linear-gradient(135deg, #7c5cff, #6244e8) !important;
+
+    background: linear-gradient(
+        135deg,
+        #7c5cff,
+        #6244e8
+    ) !important;
+
     text-decoration: none !important;
+
     border-radius: 10px;
+
     font-size: 14px;
     font-weight: bold;
-    overflow: hidden;
+
     z-index: 99999 !important;
-    box-shadow: 0 8px 25px rgba(124, 92, 255, 0.35);
-    transition: top 0.25s ease, bottom 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease, gap 0.3s ease;
+
+    box-shadow:
+        0 8px 25px rgba(124, 92, 255, 0.35);
+
+    transition:
+        top 0.25s ease,
+        bottom 0.25s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .back-button:hover {
-    transform: translateX(-50%) translateY(-4px) !important;
-    gap: 15px;
-    box-shadow: 0 12px 35px rgba(124, 92, 255, 0.55);
+    transform:
+        translateX(-50%)
+        translateY(-4px) !important;
+
+    box-shadow:
+        0 12px 35px rgba(124, 92, 255, 0.55);
+}
+
+@media (max-width: 700px) {
+
+    .back-button {
+        padding: 11px 18px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .back-button {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
 }
 
 /* =========================================
