@@ -2,7 +2,98 @@
 // PORTFOLIO WEBSITE - SCRIPT.JS
 // ==========================================
 
+// Apply saved theme as early as possible.
+(function applySavedTheme() {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+        document.documentElement.classList.add("light-mode");
+        if (document.body) {
+            document.body.classList.add("light-mode");
+        }
+    }
+})();
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    // ==========================================
+    // 0. LIGHT / DARK MODE
+    // ==========================================
+
+    let themeToggle = document.getElementById("theme-toggle");
+
+    // Automatically add the toggle to every page that uses script.js.
+    if (!themeToggle) {
+        const navList = document.querySelector("nav ul");
+
+        if (navList) {
+            const themeItem = document.createElement("li");
+
+            themeToggle = document.createElement("button");
+            themeToggle.id = "theme-toggle";
+            themeToggle.className = "theme-toggle";
+            themeToggle.type = "button";
+
+            themeItem.appendChild(themeToggle);
+            navList.appendChild(themeItem);
+        }
+    }
+
+    function updateThemeButton() {
+        if (!themeToggle) {
+            return;
+        }
+
+        const isLight =
+            document.body.classList.contains("light-mode");
+
+        themeToggle.textContent =
+            isLight ? "🌙" : "☀️";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            isLight
+                ? "Switch to dark mode"
+                : "Switch to light mode"
+        );
+
+        themeToggle.title =
+            isLight
+                ? "Switch to dark mode"
+                : "Switch to light mode";
+    }
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+        document.body.classList.add("light-mode");
+    } else {
+        document.body.classList.remove("light-mode");
+    }
+
+    updateThemeButton();
+
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle(
+                "light-mode"
+            );
+
+            const isLight =
+                document.body.classList.contains(
+                    "light-mode"
+                );
+
+            localStorage.setItem(
+                "theme",
+                isLight ? "light" : "dark"
+            );
+
+            updateThemeButton();
+        });
+    }
 
     // ==========================================
     // 1. MOBILE NAVIGATION
