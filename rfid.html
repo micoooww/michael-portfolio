@@ -149,7 +149,7 @@
 <script src="script.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
 
     const backButton = document.querySelector(".back-button");
     const footer = document.querySelector("footer");
@@ -158,54 +158,96 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    function moveBackButton() {
+    function updateBackButton() {
 
-        const footerRect = footer.getBoundingClientRect();
-        const buttonHeight = backButton.offsetHeight;
-        const viewportHeight = window.innerHeight;
+        const footerRect =
+            footer.getBoundingClientRect();
+
+        const buttonRect =
+            backButton.getBoundingClientRect();
+
+        const viewportHeight =
+            window.innerHeight;
 
         const normalBottom = 25;
         const gap = 20;
 
         /*
-        Normal position:
-        25px above the bottom of the screen
-        */
-        if (footerRect.top > viewportHeight - normalBottom) {
+         * NORMAL POSITION
+         * Button stays 25px above the bottom.
+         */
+        if (
+            footerRect.top >
+            viewportHeight - normalBottom
+        ) {
 
-            backButton.style.position = "fixed";
-            backButton.style.left = "50%";
-            backButton.style.top = "auto";
-            backButton.style.bottom = normalBottom + "px";
+            backButton.style.setProperty(
+                "top",
+                "auto",
+                "important"
+            );
+
+            backButton.style.setProperty(
+                "bottom",
+                normalBottom + "px",
+                "important"
+            );
 
             return;
         }
 
         /*
-        Footer is visible.
-        Move button above the footer.
-        */
-        let newTop =
+         * FOOTER IS REACHING THE SCREEN
+         * Put the button directly above the footer.
+         */
+        const newTop =
             footerRect.top -
-            buttonHeight -
+            buttonRect.height -
             gap;
 
-        /*
-        Prevent button from going above the header area.
-        */
-        if (newTop < 90) {
-            newTop = 90;
-        }
+        backButton.style.setProperty(
+            "bottom",
+            "auto",
+            "important"
+        );
 
-        backButton.style.position = "fixed";
-        backButton.style.left = "50%";
-        backButton.style.top = newTop + "px";
-        backButton.style.bottom = "auto";
+        backButton.style.setProperty(
+            "top",
+            Math.max(80, newTop) + "px",
+            "important"
+        );
     }
 
-    window.addEventListener("scroll", moveBackButton);
-    window.addEventListener("resize", moveBackButton);
+    /*
+     * Update whenever the page scrolls.
+     */
+    window.addEventListener(
+        "scroll",
+        updateBackButton,
+        { passive: true }
+    );
 
-    moveBackButton();
-});
+    /*
+     * Update when browser size changes.
+     */
+    window.addEventListener(
+        "resize",
+        updateBackButton
+    );
+
+    /*
+     * Keep checking the footer position.
+     * This makes it work even during smooth scrolling.
+     */
+    function loop() {
+        updateBackButton();
+        requestAnimationFrame(loop);
+    }
+
+    loop();
+
+})();
 </script>
+
+</body>
+</html>

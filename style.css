@@ -734,14 +734,15 @@ section {
 
 /* =========================================
    BACK TO PROJECTS
-   CENTERED + FOOTER SAFE
+   CENTER BOTTOM + FOOTER SAFE
 ========================================= */
 
 .back-button {
     position: fixed !important;
 
     left: 50% !important;
-    bottom: 25px;
+
+    bottom: 25px !important;
 
     transform: translateX(-50%) !important;
 
@@ -767,6 +768,7 @@ section {
     border-radius: 10px;
 
     font-size: 14px;
+
     font-weight: bold;
 
     z-index: 99999 !important;
