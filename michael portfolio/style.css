@@ -1922,3 +1922,437 @@ body.light-mode .theme-toggle {
     }
 }
 
+ 
+/* =========================================
+   LIGHT MODE - TEXT READABILITY FIX
+   Add this at the very bottom of style.css
+========================================= */
+
+/* Skills headings */
+body.light-mode .skill h3 {
+    color: #4930a8;
+}
+
+/* Project and certificate descriptions */
+body.light-mode .portfolio-project-info h3,
+body.light-mode .certificate-info h3 {
+    color: #242432;
+}
+
+body.light-mode .portfolio-project-info p,
+body.light-mode .certificate-info p {
+    color: #444455;
+}
+
+/* Certificate year and highlighted text */
+body.light-mode .certificate-info span {
+    color: #4930a8;
+}
+
+/* Project detail headings */
+body.light-mode .project-info h2 {
+    color: #4930a8;
+}
+
+body.light-mode .project-info p,
+body.light-mode .feature-list,
+body.light-mode .feature-list li {
+    color: #444455;
+}
+
+/* Technology tags inside project detail pages */
+body.light-mode .technology-tags span {
+    color: #4930a8;
+    background: #eeebff;
+    border-color: #c5b8ff;
+}
+
+/* Tags on homepage project cards */
+body.light-mode .portfolio-project-tags span {
+    color: #4930a8;
+    background: #eeebff;
+    border-color: #c5b8ff;
+}
+
+/* Contact links */
+body.light-mode .contact-container a {
+    color: #4930a8;
+    font-weight: 600;
+}
+
+body.light-mode .contact-container a:hover {
+    color: #352080;
+}
+
+/* Typing cursor */
+body.light-mode #typing {
+    border-right-color: #4930a8;
+}
+
+/* Ensure normal text stays readable */
+body.light-mode .about-text p,
+body.light-mode .education-content p,
+body.light-mode .skill p,
+body.light-mode .portfolio-project-info p,
+body.light-mode .certificate-info p,
+body.light-mode .contact-container p,
+body.light-mode .project-subtitle {
+    color: #444455;
+}
+
+/* Light mode theme toggle */
+body.light-mode .theme-toggle {
+    color: #332475;
+    background: #eeeeF5;
+    border-color: #d0cde0;
+}
+
+/* Hide the extra hamburger menu */
+nav .menu-button {
+    display: none !important;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE FIX
+   Keeps the existing design and colors
+========================================= */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+img {
+    max-width: 100%;
+}
+
+section,
+.project-page,
+.project-detail,
+.about-text,
+.contact-container,
+.education-card,
+.education-content,
+.skill,
+.portfolio-project-card,
+.certificate-card {
+    min-width: 0;
+}
+
+@media (max-width: 700px) {
+
+    /* HEADER AND NAVIGATION */
+
+    header {
+        width: 100%;
+    }
+
+    nav {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 12px 14px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav ul {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px 14px;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        min-width: 0;
+    }
+
+    nav ul li a {
+        font-size: 13px;
+        white-space: normal;
+    }
+
+    nav .theme-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    /* HERO */
+
+    .hero {
+        width: 100%;
+        max-width: 100%;
+        padding: 165px 16px 60px;
+        gap: 35px;
+    }
+
+    .hero-text {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(32px, 8vw, 45px);
+        overflow-wrap: anywhere;
+    }
+
+    .hello {
+        font-size: 19px;
+    }
+
+    .typing-text {
+        font-size: clamp(19px, 5vw, 24px);
+        overflow-wrap: anywhere;
+    }
+
+    .intro {
+        width: 100%;
+        font-size: 15px;
+        overflow-wrap: anywhere;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .photo-card {
+        width: min(280px, 75vw);
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* SECTIONS */
+
+    section {
+        width: 100%;
+        max-width: 100%;
+        padding: 65px 16px;
+    }
+
+    .section-title {
+        font-size: clamp(26px, 7vw, 32px);
+        overflow-wrap: anywhere;
+    }
+
+    /* ABOUT */
+
+    .about-container {
+        width: 100%;
+    }
+
+    .about-text {
+        width: 100%;
+        padding: 24px 18px;
+        overflow-wrap: anywhere;
+    }
+
+    /* EDUCATION */
+
+    .education-container {
+        width: 100%;
+        gap: 18px;
+    }
+
+    .education-card {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .education-left {
+        width: 100%;
+        min-width: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .education-content {
+        width: 100%;
+        padding: 20px 16px;
+        overflow-wrap: anywhere;
+    }
+
+    .education-content h3 {
+        font-size: 18px;
+        overflow-wrap: anywhere;
+    }
+
+    .school-name {
+        overflow-wrap: anywhere;
+    }
+
+    /* SKILLS, PROJECTS AND CERTIFICATES */
+
+    .skills-container,
+    .projects-container,
+    .certificates-container {
+        display: grid;
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .skill,
+    .portfolio-project-card,
+    .certificate-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .skill {
+        padding: 24px 20px;
+    }
+
+    .portfolio-project-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .certificate-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .portfolio-project-info,
+    .certificate-info {
+        padding: 20px 18px;
+        overflow-wrap: anywhere;
+    }
+
+    .portfolio-project-info h3,
+    .certificate-info h3 {
+        font-size: 18px;
+        overflow-wrap: anywhere;
+    }
+
+    /* PROJECT DETAIL PAGES */
+
+    .project-page {
+        width: 100%;
+        max-width: 100%;
+        padding: 150px 16px 85px;
+    }
+
+    .project-detail {
+        width: 100%;
+        max-width: 100%;
+        padding: 22px 17px;
+        overflow-wrap: anywhere;
+    }
+
+    .project-detail > h1 {
+        font-size: clamp(22px, 6vw, 28px);
+        overflow-wrap: anywhere;
+    }
+
+    .project-subtitle,
+    .project-info p,
+    .feature-list li {
+        overflow-wrap: anywhere;
+    }
+
+    .detail-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .technology-tags {
+        gap: 8px;
+    }
+
+    .technology-tags span,
+    .portfolio-project-tags span {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    /* CONTACT */
+
+    .contact-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 16px;
+        overflow-wrap: anywhere;
+    }
+
+    .contact-container a {
+        overflow-wrap: anywhere;
+    }
+
+    /* BACK BUTTON */
+
+    .back-button {
+        max-width: calc(100vw - 32px);
+        white-space: normal;
+        text-align: center;
+        bottom: 15px !important;
+    }
+
+    /* FOOTER */
+
+    footer {
+        width: 100%;
+        padding: 24px 16px;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 400px) {
+
+    nav ul {
+        gap: 8px 10px;
+    }
+
+    nav ul li a {
+        font-size: 11px;
+    }
+
+    .hero {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .hero-text h1 {
+        font-size: 34px;
+    }
+
+    .photo-card {
+        width: min(240px, 72vw);
+    }
+
+    section {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .project-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .project-detail {
+        padding: 20px 14px;
+    }
+}
