@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,13 @@
 
 <body>
 
+<!-- =========================================
+     HEADER / NAVIGATION
+========================================= -->
+
 <header>
     <nav>
+
         <h2 class="logo">
             <span>M</span>ico.
         </h2>
@@ -20,21 +26,38 @@
         <ul>
             <li><a href="index.html#home">Home</a></li>
             <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#education">Education</a></li>
             <li><a href="index.html#skills">Skills</a></li>
             <li><a href="index.html#certificates">Certificates</a></li>
             <li><a href="index.html#projects">Projects</a></li>
             <li><a href="index.html#contact">Contact</a></li>
+
+            <li>
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle"
+                    type="button"
+                    aria-label="Switch to light mode"
+                    title="Switch to light mode"
+                >
+                    ☀️
+                </button>
+            </li>
         </ul>
+
     </nav>
 </header>
 
+
+<!-- =========================================
+     CERTIFICATE DETAILS
+========================================= -->
 
 <section class="project-page">
 
     <a href="index.html#certificates" class="back-button">
         ← Back to Certificates
     </a>
-
 
     <div class="project-detail">
 
@@ -47,13 +70,19 @@
 
         <div class="project-info">
 
+            <!-- CERTIFICATE IMAGE -->
+
             <h2>Certificate</h2>
 
-            <!-- CERTIFICATE IMAGE -->
             <div class="detail-image certificate-detail-image">
-    <img src="certificate.jpg" alt="Certificate of Participation">
-</div>
+                <img
+                    src="certificate.jpg"
+                    alt="Certificate of Participation in the 1st EARIST Cavite Research Colloquium"
+                >
+            </div>
 
+
+            <!-- ABOUT THE CERTIFICATE -->
 
             <h2>About the Certificate</h2>
 
@@ -64,12 +93,16 @@
             </p>
 
 
+            <!-- EVENT -->
+
             <h2>Event</h2>
 
             <p>
                 1st EARIST Cavite Research Colloquium
             </p>
 
+
+            <!-- THEME -->
 
             <h2>Theme</h2>
 
@@ -78,12 +111,16 @@
             </p>
 
 
+            <!-- YEAR -->
+
             <h2>Year</h2>
 
             <p>
                 2026
             </p>
 
+
+            <!-- PARTICIPATION -->
 
             <h2>My Participation</h2>
 
@@ -93,6 +130,8 @@
                 and discussions focused on research and community impact.
             </p>
 
+
+            <!-- LEARNINGS -->
 
             <h2>What I Learned</h2>
 
@@ -109,14 +148,28 @@
 </section>
 
 
+<!-- =========================================
+     FOOTER
+========================================= -->
+
 <footer>
     <p>&copy; 2026 Michael Fermo. All Rights Reserved.</p>
 </footer>
 
+
+<!-- =========================================
+     SHARED JAVASCRIPT
+========================================= -->
+
 <script src="script.js"></script>
 
+
+<!-- =========================================
+     BACK BUTTON / FOOTER POSITIONING
+========================================= -->
+
 <script>
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     const backButton = document.querySelector(".back-button");
     const footer = document.querySelector("footer");
@@ -127,26 +180,18 @@
 
     function updateBackButton() {
 
-        const footerRect =
-            footer.getBoundingClientRect();
-
-        const buttonRect =
-            backButton.getBoundingClientRect();
-
-        const viewportHeight =
-            window.innerHeight;
+        const footerRect = footer.getBoundingClientRect();
+        const buttonHeight = backButton.offsetHeight;
+        const viewportHeight = window.innerHeight;
 
         const normalBottom = 25;
         const gap = 20;
 
         /*
-         * NORMAL POSITION
-         * Button stays 25px above the bottom.
+         * Keep the button near the bottom of the screen
+         * while the footer is still below the viewport.
          */
-        if (
-            footerRect.top >
-            viewportHeight - normalBottom
-        ) {
+        if (footerRect.top > viewportHeight - normalBottom) {
 
             backButton.style.setProperty(
                 "top",
@@ -164,13 +209,11 @@
         }
 
         /*
-         * FOOTER IS REACHING THE SCREEN
-         * Put the button directly above the footer.
+         * Move the button above the footer when
+         * the footer enters the viewport.
          */
         const newTop =
-            footerRect.top -
-            buttonRect.height -
-            gap;
+            footerRect.top - buttonHeight - gap;
 
         backButton.style.setProperty(
             "bottom",
@@ -185,35 +228,36 @@
         );
     }
 
-    /*
-     * Update whenever the page scrolls.
-     */
+    let updateScheduled = false;
+
+    function scheduleUpdate() {
+
+        if (updateScheduled) {
+            return;
+        }
+
+        updateScheduled = true;
+
+        requestAnimationFrame(function () {
+            updateBackButton();
+            updateScheduled = false;
+        });
+    }
+
     window.addEventListener(
         "scroll",
-        updateBackButton,
+        scheduleUpdate,
         { passive: true }
     );
 
-    /*
-     * Update when browser size changes.
-     */
     window.addEventListener(
         "resize",
-        updateBackButton
+        scheduleUpdate
     );
 
-    /*
-     * Keep checking the footer position.
-     * This makes it work even during smooth scrolling.
-     */
-    function loop() {
-        updateBackButton();
-        requestAnimationFrame(loop);
-    }
+    updateBackButton();
 
-    loop();
-
-})();
+});
 </script>
 
 </body>

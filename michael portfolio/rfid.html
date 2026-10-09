@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +12,13 @@
 
 <body>
 
+<!-- =========================================
+     HEADER / NAVIGATION
+========================================= -->
+
 <header>
     <nav>
+
         <h2 class="logo">
             <span>M</span>ico.
         </h2>
@@ -20,14 +26,32 @@
         <ul>
             <li><a href="index.html#home">Home</a></li>
             <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#education">Education</a></li>
             <li><a href="index.html#skills">Skills</a></li>
             <li><a href="index.html#certificates">Certificates</a></li>
             <li><a href="index.html#projects">Projects</a></li>
             <li><a href="index.html#contact">Contact</a></li>
+
+            <li>
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle"
+                    type="button"
+                    aria-label="Switch to light mode"
+                    title="Switch to light mode"
+                >
+                    ☀️
+                </button>
+            </li>
         </ul>
+
     </nav>
 </header>
 
+
+<!-- =========================================
+     PROJECT DETAILS
+========================================= -->
 
 <section class="project-page">
 
@@ -37,7 +61,9 @@
 
     <div class="project-detail">
 
-        <h1>RFID Library Book Monitoring and Security System</h1>
+        <h1>
+            RFID Library Book Monitoring and Security System
+        </h1>
 
         <p class="project-subtitle">
             RFID-Based Library Book Monitoring and Security System
@@ -46,11 +72,15 @@
 
         <div class="project-info">
 
+            <!-- PROJECT OVERVIEW -->
+
             <h2>Project Overview</h2>
 
-            <!-- PROJECT IMAGE -->
             <div class="detail-image">
-                <img src="rfid.png" alt="RFID Library Book Monitoring and Security System">
+                <img
+                    src="projects/rfid.png"
+                    alt="RFID Library Book Monitoring and Security System"
+                >
             </div>
 
             <p>
@@ -62,6 +92,8 @@
             </p>
 
 
+            <!-- PURPOSE -->
+
             <h2>Purpose</h2>
 
             <p>
@@ -72,6 +104,8 @@
                 has been properly recorded as borrowed or purchased.
             </p>
 
+
+            <!-- HOW IT WORKS -->
 
             <h2>How It Works</h2>
 
@@ -91,6 +125,8 @@
             </p>
 
 
+            <!-- KEY FEATURES -->
+
             <h2>Key Features</h2>
 
             <ul class="feature-list">
@@ -103,6 +139,8 @@
             </ul>
 
 
+            <!-- TECHNOLOGY USED -->
+
             <h2>Technology Used</h2>
 
             <div class="technology-tags">
@@ -114,6 +152,8 @@
             </div>
 
 
+            <!-- MY ROLE -->
+
             <h2>My Role</h2>
 
             <p>
@@ -123,6 +163,8 @@
                 system's features and functions.
             </p>
 
+
+            <!-- WHAT I LEARNED -->
 
             <h2>What I Learned</h2>
 
@@ -142,14 +184,28 @@
 </section>
 
 
+<!-- =========================================
+     FOOTER
+========================================= -->
+
 <footer>
     <p>&copy; 2026 Michael Fermo. All Rights Reserved.</p>
 </footer>
 
+
+<!-- =========================================
+     SHARED JAVASCRIPT
+========================================= -->
+
 <script src="script.js"></script>
 
+
+<!-- =========================================
+     BACK BUTTON / FOOTER POSITIONING
+========================================= -->
+
 <script>
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     const backButton = document.querySelector(".back-button");
     const footer = document.querySelector("footer");
@@ -160,26 +216,19 @@
 
     function updateBackButton() {
 
-        const footerRect =
-            footer.getBoundingClientRect();
-
-        const buttonRect =
-            backButton.getBoundingClientRect();
-
-        const viewportHeight =
-            window.innerHeight;
+        const footerRect = footer.getBoundingClientRect();
+        const buttonHeight = backButton.offsetHeight;
+        const viewportHeight = window.innerHeight;
 
         const normalBottom = 25;
         const gap = 20;
 
         /*
-         * NORMAL POSITION
-         * Button stays 25px above the bottom.
+         * Normal position:
+         * Keep the button 25px above the bottom
+         * while the footer is below the viewport.
          */
-        if (
-            footerRect.top >
-            viewportHeight - normalBottom
-        ) {
+        if (footerRect.top > viewportHeight - normalBottom) {
 
             backButton.style.setProperty(
                 "top",
@@ -197,13 +246,11 @@
         }
 
         /*
-         * FOOTER IS REACHING THE SCREEN
-         * Put the button directly above the footer.
+         * When the footer enters the viewport,
+         * move the button above the footer.
          */
         const newTop =
-            footerRect.top -
-            buttonRect.height -
-            gap;
+            footerRect.top - buttonHeight - gap;
 
         backButton.style.setProperty(
             "bottom",
@@ -218,35 +265,36 @@
         );
     }
 
-    /*
-     * Update whenever the page scrolls.
-     */
+    let updateScheduled = false;
+
+    function scheduleUpdate() {
+
+        if (updateScheduled) {
+            return;
+        }
+
+        updateScheduled = true;
+
+        requestAnimationFrame(function () {
+            updateBackButton();
+            updateScheduled = false;
+        });
+    }
+
     window.addEventListener(
         "scroll",
-        updateBackButton,
+        scheduleUpdate,
         { passive: true }
     );
 
-    /*
-     * Update when browser size changes.
-     */
     window.addEventListener(
         "resize",
-        updateBackButton
+        scheduleUpdate
     );
 
-    /*
-     * Keep checking the footer position.
-     * This makes it work even during smooth scrolling.
-     */
-    function loop() {
-        updateBackButton();
-        requestAnimationFrame(loop);
-    }
+    updateBackButton();
 
-    loop();
-
-})();
+});
 </script>
 
 </body>

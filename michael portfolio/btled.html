@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,24 +12,46 @@
 
 <body>
 
+<!-- =========================================
+     HEADER / NAVIGATION
+========================================= -->
+
 <header>
     <nav>
+
         <h2 class="logo">
             <span>M</span>ico.
         </h2>
 
-
         <ul>
             <li><a href="index.html#home">Home</a></li>
             <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#education">Education</a></li>
             <li><a href="index.html#skills">Skills</a></li>
             <li><a href="index.html#certificates">Certificates</a></li>
             <li><a href="index.html#projects">Projects</a></li>
             <li><a href="index.html#contact">Contact</a></li>
+
+            <li>
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle"
+                    type="button"
+                    aria-label="Switch to light mode"
+                    title="Switch to light mode"
+                >
+                    ☀️
+                </button>
+            </li>
         </ul>
+
     </nav>
 </header>
 
+
+<!-- =========================================
+     PROJECT DETAILS
+========================================= -->
 
 <section class="project-page">
 
@@ -47,11 +70,15 @@
 
         <div class="project-info">
 
+            <!-- PROJECT OVERVIEW -->
+
             <h2>Project Overview</h2>
 
-            <!-- PROJECT IMAGE -->
             <div class="detail-image">
-                <img src="educ.jpg" alt="BTLEd Tracer Study">
+                <img
+                    src="projects/educ.png"
+                    alt="BTLEd Tracer Study"
+                >
             </div>
 
             <p>
@@ -62,6 +89,8 @@
             </p>
 
 
+            <!-- PURPOSE -->
+
             <h2>Purpose</h2>
 
             <p>
@@ -70,6 +99,8 @@
                 tracer study records.
             </p>
 
+
+            <!-- KEY FEATURES -->
 
             <h2>Key Features</h2>
 
@@ -82,21 +113,32 @@
             </ul>
 
 
+            <!-- TECHNOLOGIES -->
+
             <h2>Technologies Used</h2>
 
             <div class="technology-tags">
                 <span>PHP</span>
                 <span>MySQL</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
                 <span>Database</span>
             </div>
 
 
+            <!-- MY ROLE -->
+
             <h2>My Role</h2>
 
             <p>
-                I assisted in the development of the system, particularly in coding, interface improvements, testing, and documenting the system's features and functions.
+                I assisted in the development of the system, particularly
+                in coding, interface improvements, testing, and documenting
+                the system's features and functions.
             </p>
 
+
+            <!-- WHAT I LEARNED -->
 
             <h2>What I Learned</h2>
 
@@ -113,14 +155,28 @@
 </section>
 
 
+<!-- =========================================
+     FOOTER
+========================================= -->
+
 <footer>
     <p>&copy; 2026 Michael Fermo. All Rights Reserved.</p>
 </footer>
 
+
+<!-- =========================================
+     SHARED JAVASCRIPT
+========================================= -->
+
 <script src="script.js"></script>
 
+
+<!-- =========================================
+     BACK BUTTON / FOOTER POSITIONING
+========================================= -->
+
 <script>
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     const backButton = document.querySelector(".back-button");
     const footer = document.querySelector("footer");
@@ -131,26 +187,16 @@
 
     function updateBackButton() {
 
-        const footerRect =
-            footer.getBoundingClientRect();
-
-        const buttonRect =
-            backButton.getBoundingClientRect();
-
-        const viewportHeight =
-            window.innerHeight;
+        const footerRect = footer.getBoundingClientRect();
+        const buttonHeight = backButton.offsetHeight;
+        const viewportHeight = window.innerHeight;
 
         const normalBottom = 25;
         const gap = 20;
 
-        /*
-         * NORMAL POSITION
-         * Button stays 25px above the bottom.
-         */
-        if (
-            footerRect.top >
-            viewportHeight - normalBottom
-        ) {
+        // Keep the button at the bottom while
+        // the footer is still below the viewport.
+        if (footerRect.top > viewportHeight - normalBottom) {
 
             backButton.style.setProperty(
                 "top",
@@ -167,14 +213,9 @@
             return;
         }
 
-        /*
-         * FOOTER IS REACHING THE SCREEN
-         * Put the button directly above the footer.
-         */
+        // Move the button above the footer.
         const newTop =
-            footerRect.top -
-            buttonRect.height -
-            gap;
+            footerRect.top - buttonHeight - gap;
 
         backButton.style.setProperty(
             "bottom",
@@ -189,35 +230,36 @@
         );
     }
 
-    /*
-     * Update whenever the page scrolls.
-     */
+    let updateScheduled = false;
+
+    function scheduleUpdate() {
+
+        if (updateScheduled) {
+            return;
+        }
+
+        updateScheduled = true;
+
+        requestAnimationFrame(function () {
+            updateBackButton();
+            updateScheduled = false;
+        });
+    }
+
     window.addEventListener(
         "scroll",
-        updateBackButton,
+        scheduleUpdate,
         { passive: true }
     );
 
-    /*
-     * Update when browser size changes.
-     */
     window.addEventListener(
         "resize",
-        updateBackButton
+        scheduleUpdate
     );
 
-    /*
-     * Keep checking the footer position.
-     * This makes it work even during smooth scrolling.
-     */
-    function loop() {
-        updateBackButton();
-        requestAnimationFrame(loop);
-    }
+    updateBackButton();
 
-    loop();
-
-})();
+});
 </script>
 
 </body>
